@@ -1,0 +1,103 @@
+{% extends 'adminstrator/dashboard/masterpage.html' %}
+{% load static %}
+
+
+
+{% block content %}	
+    <!--  BEGIN CONTENT PART  -->
+    <div id="content" class="main-content">
+        <div class="container-fluid">
+            <div class="container-fluid">
+
+                <div class="row layout-top-spacing">
+                    <div class="col-lg-12">
+                        
+                        <div class="row">
+                            <div id="flFormsGrid" class="col-lg-12 layout-spacing">
+                                <div class="statbox widget box box-shadow">
+                                    <div class="widget-header">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <h4> اضافه کردن دسته بندی جدید </h4>
+                                            </div>                                                                        
+                                        </div>
+                                    </div>
+                                    <div class="widget-content widget-content-area">
+                                        <form enctype="multipart/form-data" method="POST">
+                                            {% csrf_token %}
+                                            
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-12">
+                                                    <label for="inputURL"> آدرس دسته بندی </label>
+                                                    <input type="text" name="url" class="form-control" id="inputURL" placeholder=" MCCB " value="{{category_object.url}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-6">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="inputName"> نام دسته بندی </label>
+                                                        <input type="text" name="name" class="form-control" id="inputName" placeholder=" کلید اتوماتیک " value="{{category_object.name}}">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label for="inputPosition"> جایگاه دسته بندی </label>
+                                                        <input type="number" name="position" class="form-control" id="inputPosition" placeholder=" 1 " value="{{category_object.position}}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label for="inputVector"> وکتور دسته بندی </label>
+                                                    {{form.vector}}
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-12 mb-4">
+                                                    <button type="submit" name="editcatBTN" class="btn btn-primary mt-3 float-right"> ثبت </button>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </form>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT PART  -->
+{% endblock content %}
+
+{% block PageTitle %}
+{% endblock PageTitle %}
+
+{% block dir %}
+<h3> <a href="{% url 'mng_blogs' %}"> بلاگ ها </a> </h3>
+{% endblock %}
+
+{% block links %}
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/dropify/dropify.min.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/users/account-setting.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/forms/switches.css'%}"></script>
+{% endblock links %}
+
+{% block scripts %}
+<script src="{% static 'adminstrator/plugins/dropify/dropify.min.js'%}"></script>
+<script src="{% static 'adminstrator/plugins/blockui/jquery.blockUI.min.js'%}"></script>
+<script src="{% static 'adminstrator/assets/js/users/account-settings.js'%}"></script>
+
+<script>
+
+    // add current logo_1th to image field  
+    let category_vector = document.getElementById("id_vector");
+    category_vector.setAttribute('data-default-file', '/media/{{category_object.vector}}');
+
+</script>
+
+{% endblock scripts %}

@@ -1,0 +1,202 @@
+{% extends 'adminstrator/dashboard/masterpage.html' %}
+{% load static %}
+
+
+
+{% block content %}	
+    <!--  BEGIN CONTENT PART  -->
+    <div id="content" class="main-content">
+        <div class="container-fluid">
+            <div class="container-fluid">
+
+                <div class="row layout-top-spacing">
+                    <div class="col-lg-12">
+                        
+                        <div class="row">
+                            <div id="flFormsGrid" class="col-lg-12 layout-spacing">
+                                <div class="statbox widget box box-shadow">
+                                    <div class="widget-header">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <h4> اضافه کردن محصول  </h4>
+                                            </div>                                                                        
+                                        </div>
+                                    </div>
+                                    <div class="widget-content widget-content-area">
+
+                                        <form enctype="multipart/form-data" method="POST">
+                                            {% csrf_token %}
+
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputBrand"> برند </label>
+                                                    <select name="brand" id="inputBrand" class="selectpicker form-control"  data-live-search="true">
+                                                        {% for brand in brands %}
+                                                            <option value="{{brand.en_name}}">{{brand.fa_name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputSubset"> دسته بندی </label>
+                                                    <select name="Subset" id="inputSubset" class="selectpicker form-control"  data-live-search="true">
+                                                        {% for cat in catsubsets %}
+                                                            <option value="{{cat.slug}}">{{cat.name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputCode"> کد فنی </label>
+                                                    <input type="text" name="code" class="form-control" id="inputCode" placeholder=" LV429676 ">
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-6">
+                                                    <label for="inputFa_Name"> نام فارسی </label>
+                                                    <input type="text" name="fa_name" class="form-control" id="inputFa_Name" placeholder=" کليد اتوماتیک اشنایدر الکتریک 25 آمپر اشنایدر سه پل 70KA حفاظت TM-D ">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputEn_Name"> نام انگلیسی </label>
+                                                    <input type="text" name="en_name" class="form-control" id="inputEn_Name" placeholder=" MCCB_LV429676 ">
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="inputURL"> آدرس </label>
+                                                    <input type="text" name="url" class="form-control" id="inputURL" placeholder=" MCCB_LV429676 ">
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-12">
+                                                    <label for="inputTags"> برچسب ها </label>
+                                                    <span class="text-danger"> در وارد کردن صحیح برچسب ها دقت کنید زیرا برای تغییر آنها باید با پشتیبانی تماس حاصل کنید . </span>
+                                                    <input type="text" name="tags" class="form-control" id="inputTags" placeholder=" کلید اتوماتیک,کلید اشنایدر الکتریک,برند اشنایدر الکتریک,25 آمپر,سه پل,70KA ,AC,TM-D,کلید قابل تنظیم,LV429676 ">
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label for="inputReview" style="margin: 0 auto;" class="mb-2"> نقدر و بررسی </label>
+                                                    <div class="form-group col-md-12 mb-4">
+                                                        {{pform.media}}
+                                                        {{pform.review}}
+                                                    </div>
+                                                </div>
+                                                <div class="row col-md-6">
+                                                    <div class="form-group col-md-12 mb-4">
+                                                        <label for="inputPoster"> عکس اصلی محصول </label>
+                                                        {{pform.poster}}
+                                                    </div>
+                                                    <div class="form-group col-md-12 mb-4">
+                                                        <div class="custom-file-container" data-upload-id="mySecondImage">
+                                                            <label> عکس های محصول + عکس اصلی <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                                            <label class="custom-file-container__custom-file" >
+                                                                <input type="file" name="image" class="custom-file-container__custom-file__custom-file-input" multiple>
+                                                                <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                                                <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                                            </label>
+                                                            <div class="custom-file-container__image-preview"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+
+
+                                            <div class="widget-header">
+                                                <div class="row">
+                                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                        <h4> اضافه کردن جزئیات محصول  </h4>
+                                                        <p class="text-danger mb-4"> * اگر تیک هر جزییات محصول را بزنید اون رو مهم ساخته اید به این معناست که در صفحه محصول در کنار عکس محصول نمایش داده خواهد شد .  </p>
+                                                    </div>                                                                        
+                                                </div>
+                                            </div>
+                                            {% if featureCat_status == 404 %}
+                                                برای اضافه کردن جزییات محصول باید دسته بندی جزییات محصول بسازید 
+                                            {% endif %}
+                                            {% if featureCat_status == 200 %}
+                                                <div id="id_features">
+                                                    <input type="hidden" name="counter" id="counter" value="1">
+
+                                                    <div class="form-row mb-4 col-12" id="id_divInputs-1">
+                                                        <div class="form-group mt-2" id="important-1">
+                                                            <label class="switch s-icons s-outline  s-outline-primary mr-2">
+                                                                <input name="important-1" type="checkbox">
+                                                                <span class="slider round"></span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group col-md-3" id="FeatureCats">
+                                                            <select name="FeatureCats-1" id="inputFeatureCats-1" class="selectpicker form-control"  data-live-search="true">
+                                                                {% for featureCat in featureCats %}
+                                                                    <option value="{{featureCat.name}}">{{featureCat.name}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <input type="text" id="id_keyInput-1" name="key-1"  class="form-control"  placeholder=" کلیدواژه ">
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <input type="text" id="id_valueInput-1" name="value-1"  class="form-control"  placeholder=" مقدار ">
+                                                        </div>
+                                                        <span onclick="add_inputs(1)" class="btn btn-primary mb-2 ml-2 rounded-circle">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                                        </span>
+                                                    </div>
+
+                                                </div>   
+                                            {% endif %}                                         
+
+
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <button type="submit" name="addproductBTN" class="btn btn-primary mt-3" style="float: left;"> ثبت </button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT PART  -->
+{% endblock content %}
+
+{% block PageTitle %}
+{% endblock PageTitle %}
+
+{% block dir %}
+<h3> <a href="{% url 'mng_blogs' %}"> بلاگ ها </a> </h3>
+{% endblock %}
+
+{% block links %}
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/dropify/dropify.min.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/users/account-setting.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/forms/switches.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/file-upload/file-upload-with-preview.min.css'%}"></script>
+{% endblock links %}
+
+{% block scripts %}
+<script src="{% static 'adminstrator/plugins/dropify/dropify.min.js'%}"></script>
+<script src="{% static 'adminstrator/plugins/blockui/jquery.blockUI.min.js'%}"></script>
+<script src="{% static 'adminstrator/assets/js/users/account-settings.js'%}"></script>
+<script src="{% static 'adminstrator/plugins/file-upload/file-upload-with-preview.min.js'%}"></script>
+<script src="{% static 'adminstrator\ajax\addproduct.js'%}"></script>
+<script src="{% static 'CKEditor/ckeditor.js'%}"></script>
+<script>
+    CKEDITOR.replace('ck')
+</script>
+<script>
+    document.getElementById('id_image').setAttribute("multiple", "");
+</script>
+<script>
+    //First upload
+    var firstUpload = new FileUploadWithPreview('myFirstImage')
+    //Second upload
+    var secondUpload = new FileUploadWithPreview('mySecondImage')
+</script>
+{% endblock scripts %}

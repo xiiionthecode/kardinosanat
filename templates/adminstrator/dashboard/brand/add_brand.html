@@ -1,0 +1,131 @@
+{% extends 'adminstrator/dashboard/masterpage.html' %}
+{% load static %}
+
+
+
+{% block content %}	
+    <!--  BEGIN CONTENT PART  -->
+    <div id="content" class="main-content">
+        <div class="container-fluid">
+            <div class="container-fluid">
+
+                <div class="row layout-top-spacing">
+                    <div class="col-lg-12">
+                        
+                        <div class="row">
+                            <div id="flFormsGrid" class="col-lg-12 layout-spacing">
+                                <div class="statbox widget box box-shadow">
+                                    <div class="widget-header">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <h4> اضافه کردن شرکت </h4>
+                                            </div>                                                                        
+                                        </div>
+                                    </div>
+                                    <div class="widget-content widget-content-area">
+                                        <form enctype="multipart/form-data" method="POST">
+                                            {% csrf_token %}
+                                            
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputURL"> ادرس برند </label>
+                                                    <input type="text" name="url" class="form-control" id="inputURL" placeholder=" SchneiderElectric ">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputFaName"> نام برند به فارسی </label>
+                                                    <input type="text" name="fa_name" class="form-control" id="inputFaName" placeholder=" اشنایدر الکتریک ">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputEnName"> نام برند به انگلیسی </label>
+                                                    <input type="text" name="en_name" class="form-control" id="inputEnName" placeholder=" Schneider Electric ">
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputCountry"> کشور </label>
+                                                    <input type="text" name="country" class="form-control" id="inputCountry" placeholder=" فرانسه ">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputFoundedDate"> تاریخ تاسیس </label>
+                                                    <input type="text" name="founded_date" class="form-control" id="inputFoundedDate" placeholder=" 1836 ">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="inputNumberofEmployees"> تعداد کامندها </label>
+                                                    <input type="text" name="number_of_employees" class="form-control" id="inputNumberofEmployees" placeholder=" 162339 ">
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label for="inputBriefExplamations"> توضیح کوتاه </label>
+                                                    {{form.brief_explamations}}
+                                                </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <label for="inputDescription"> توضیحات </label>
+                                                    {{form.media}}
+                                                    {{form.descriptions}}
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-3 mb-4">
+                                                    <label for="inputLogo1th"> لوگو اول </label>
+                                                    {{form.logo_1th}}
+                                                </div>
+                                                <div class="form-group col-md-3 mb-4">
+                                                    <label for="inputLogo2th"> لوگو دوم </label>
+                                                    {{form.logo_2th}}
+                                                </div>
+                                                <div class="form-group col-md-3 mb-4">
+                                                    <label for="inputLogoblured"> لوگو بلور </label>
+                                                    {{form.logo_blured}}
+                                                </div>
+                                                <div class="form-group col-md-3 mb-4">
+                                                    <label for="inputLogoslider"> لوگو اسلایدر </label>
+                                                    {{form.logo_slider}}
+                                                </div>
+                                            </div>
+                                            <div class="form-row mb-4 col-12">
+                                                <div class="form-group col-md-12 mb-4">
+                                                    <button type="submit" name="addbrandBTN" class="btn btn-primary mt-3 float-right"> ثبت </button>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </form>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT PART  -->
+{% endblock content %}
+
+{% block PageTitle %}
+{% endblock PageTitle %}
+
+{% block dir %}
+<h3> <a href="{% url 'mng_blogs' %}"> بلاگ ها </a> </h3>
+{% endblock %}
+
+{% block links %}
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/dropify/dropify.min.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/users/account-setting.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/forms/switches.css'%}"></script>
+{% endblock links %}
+
+{% block scripts %}
+<script src="{% static 'adminstrator/plugins/dropify/dropify.min.js'%}"></script>
+<script src="{% static 'adminstrator/plugins/blockui/jquery.blockUI.min.js'%}"></script>
+<script src="{% static 'adminstrator/assets/js/users/account-settings.js'%}"></script>
+<script src="{% static 'CKEditor/ckeditor.js'%}"></script>
+<script>
+    CKEDITOR.replace('ck')
+</script>
+{% endblock scripts %}

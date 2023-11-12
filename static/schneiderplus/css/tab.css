@@ -1,0 +1,7 @@
+button.active {
+    --tw-border-opacity:1;
+    border-color: rgb(22 101 52 / var(--tw-border-opacity));
+    border-bottom-width: 2px;
+    border-radius: 1.5rem;
+    color: rgb(31 41 55 / var(--tw-text-opacity));
+}

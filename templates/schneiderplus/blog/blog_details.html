@@ -1,0 +1,135 @@
+{% extends 'schneiderplus/blog/masterpage.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<section class="mb-20 px-4">
+    <div class="container mx-auto max-w-screen-xl">
+      <div class="bg-white p-4 rounded-3xl my-4">
+        <div class="text-sm breadcrumbs">
+          <ul>
+            <li><a>خانه</a></li> 
+            <li><a>بلاگ ها</a></li> 
+            <li>{{blog.title}}</li>
+          </ul>
+        </div>
+      </div>
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 md:col-span-9 order-1">
+                <div class="bg-white p-4 rounded-3xl leading-8">
+                    <div class="border-r-4 bg-slate-100 border-green-600 mb-4 rounded-2xl p-4">
+                        <h1 class="mb-2 text-base font-YekanBakh-Bold">{{blog.title}}</h1>
+                        <div class="flex items-center gap-4 text-xs">
+                            <span class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" id="mainIconPathAttribute" stroke-width="0.5" stroke="#808080" fill="#737373"></path>
+                                </svg>
+                                {{blog.day}} {{blog.month}} {{blog.year}}      
+                                                           
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                {{blog.readingtime}}                              
+                            </span>
+                        </div>
+                    </div>
+                    <img class="rounded-2xl mb-2" src="/media/{{blog.poster}}" alt="">
+                    {{blog.article_text|safe}}
+                    <div class="mt-4">
+                      <div class="border-r-4 bg-slate-100 border-green-600 mb-4 rounded-2xl p-4">
+                        <h3 class="font-YekanBakh-Bold text-slate-800 text-base">برچسب ها</h3>
+                    </div>
+                        {% for tag in blog_tags %}
+                          <div class="inline">
+                            <a href="" class="border-green-800 rounded-3xl py-2 px-4 mx-2 my-4 border-2 transition hover:bg-green-800 hover:text-white">{{tag}}</a>
+                          </div>
+                        {% endfor %}
+                        <!-- <p>شما با نام یاسمن وارد شده اید!!</p>
+                        <textarea class="textarea textarea-bordered w-full h-36 rounded-3xl" placeholder="نظر خود را بنویسید..."></textarea>
+                        <button class="btn bg-stone-800 hover:bg-stone-900 text-white rounded-2xl">ارسال پیام</button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-3 order-2">
+              <div class="bg-white p-4 rounded-3xl mb-4 leading-8">
+                  <div class="border-r-4 bg-slate-100 border-green-600 mb-4 rounded-2xl p-4">
+                      <h3 class="font-YekanBakh-Bold text-slate-800 text-base">پربازدیدترین ها</h3>
+                  </div>
+                  <div>
+                    {% for pop_blog in popular_blogs %}
+                      <div class="flex items-center my-4">
+                          <div class="avatar">
+                              <div class="w-16 rounded-full">
+                                <a href="{% url 'blog_det' pop_blog.url %}">
+                                  <img src="/media/{{pop_blog.poster}}" />
+                                </a>
+                              </div>
+                            </div>
+                            <div class="mr-2">
+                              <a href="{% url 'blog_det' pop_blog.url %}">
+                                <h3 class="font-YekanBakh-Bold text-slate-800 text-sm">{{pop_blog.title}}</h3>
+                              </a>
+                              <p>{{pop_blog.description}}</p>    
+                            </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  
+              </div>
+              <div class="bg-white p-4 rounded-2xl mb-4 leading-8">
+                  <div class="border-r-4 bg-slate-100 border-green-600 mb-4 rounded-3xl p-4">
+                      <h3 class="font-YekanBakh-Bold text-slate-800 text-base">دسته بندی</h3>
+                  </div>
+                  <ul class="menu">
+                      <li><a>دسته بندی اول</a></li>
+                      <li>
+                        <details open>
+                          <summary>دسته بندی دوم</summary>
+                          <ul>
+                            <li><a>زیر منوی 1 دسته بندی دوم</a></li>
+                            <li><a>زیر منوی 2 دسته بندی دوم</a></li>
+                            <li>
+                              <details open>
+                                <summary>دسته بندی سوم</summary>
+                                <ul>
+                                  <li><a>زیر منوی 1 دسته بندی سوم</a></li>
+                                  <li><a>زیر منوی 2 دسته بندی سوم</a></li>
+                                </ul>
+                              </details>
+                            </li>
+                          </ul>
+                        </details>
+                      </li>
+                      <li><a>دسته بندی چهارم</a></li>
+                    </ul>
+                  
+              </div>
+          </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+{% block meta_title %}
+ {{blog.title}}
+{% endblock meta_title %}
+
+{% block meta_tag %}
+
+{% endblock meta_tag %}
+
+{% block meta_description %}
+
+{% endblock meta_description %}
+
+{% block links %}
+
+{% endblock links %}
+
+{% block scripts %}
+
+{% endblock scripts %}

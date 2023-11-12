@@ -1,0 +1,146 @@
+{% extends 'adminstrator/dashboard/masterpage.html' %}
+{% load static %}
+
+
+
+{% block content %}	
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                
+                <div class="row layout-top-spacing">
+                    <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                                        <h4> جدول محصولات  </h4>
+                                    </div>          
+                                    <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                                        <a href="{% url 'add_product' %}" class="btn btn-primary mb-2 mt-3 mr-3" style="float: left;"> اضافه کردن محصول جدید </a>
+                                        <a href="{% url 'add_featurecats' %}" class="btn btn-primary mb-2 mt-3 mr-3" style="float: left;"> اضافه کردن دسته بندی جزییات محصول </a>
+                                    </div>   
+                                </div>
+                            </div>
+                            <div class="widget-content widget-content-area">
+                                <div class="table-responsive mb-4">
+                                    <table id="style-3" class="table style-3  table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="checkbox-column text-center"> شناسه </th>
+                                                <th class="text-center"> نام </th>
+                                                <th class="text-center"> عکس </th>
+                                                <th class="text-center"> کد فنی </th>
+                                                <th class="text-center"> برند </th>
+                                                <th class="text-center"> دسته بندی </th>
+                                                <th class="text-center"> تاریخ اضافه شدن </th>
+                                                <th class="text-center"> تاریخ اخرین ویرایش </th>
+                                                <th class="text-center"> نفد و بررسی </th>
+                                                <th class="text-center">عمل</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for product in products %}
+                                            <tr>
+                                                <td class="checkbox-column text-center"> {{product.id}} </td>
+                                                <td class="checkbox-column text-center"> {{product.faName}} </td>
+                                                <td class="text-center">
+                                                    <span><img height="60px" width="60px" src="/media/{{product.poster}}/" class="profile-img"></span>
+                                                </td>
+                                                <td class="text-center"> {{product.code}} </td>
+                                                <td class="text-center"> {{product.Brand.fa_name}} </td>
+                                                <td class="text-center"> {{product.ProductCategorySubset.name}} </td>
+                                                <td class="text-center"> {{product.J_addition_datetime}} </td>
+                                                <td class="text-center"> {{product.J_editition_datetime}} </td>
+                                                <td class="text-center"> 
+                                                    <button type="button" class="btn btn-info mb-2 mr-2 " data-toggle="modal" data-target="#ProductReview">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                                    </button>
+                                                </td>
+                                                <!-- START Modal -->
+                                                <div class="modal animated fadeInRight custo-fadeInRight " id="ProductReview" tabindex="-1" role="dialog" aria-labelledby="ProductReviewLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-xl " role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="ProductReviewLabel"> نقد و بررسی </h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: azure;">
+                                                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p class="modal-text">
+                                                                    {{product.review|safe}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- END Modal -->
+                                                <td class="text-center">
+                                                    <ul class="table-controls">
+                                                        <li><a href="{% url 'edit_product' product.slug %}" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="ویرایش"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                                        <li><a href="{% url 'deActive_product' product.slug %}" class="bs-tooltip" data-toggle="tooltip" data-placement="top" title="" data-original-title="حذف"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  END CONTENT AREA  -->
+{% endblock content %}
+
+
+{% block PageTitle %}
+{% endblock PageTitle %}
+
+{% block dir %}
+    <h3> بلاگ ها </h3>
+{% endblock %}
+
+{% block head %}
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/table/datatable/datatables.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/forms/theme-checkbox-radio.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/table/datatable/dt-global_style.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/table/datatable/custom_dt_custom.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/animate/animate.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/components/custom-modal.css'%}"></script>
+{% endblock head %}
+
+
+
+{% block script %}
+<script src="{% static 'adminstrator/plugins/highlight/highlight.pack.js'%}"></script>
+<script src="{% static 'adminstrator/assets/js/custom.js'%}"></script>
+<script src="{% static 'adminstrator/assets/js/scrollspyNav.js'%}"></script>
+<script src="{% static 'adminstrator/plugins/table/datatable/datatables.js'%}"></script>
+<script>
+    c3 = $('#style-3').DataTable({
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>' },
+                "sInfo": "صفحه _PAGE_ از _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "جستجو کنید...",
+               "sLengthMenu": "نتایج :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [5, 10, 20, 50],
+            "pageLength": 5
+        });
+
+        multiCheck(c3);
+
+    checkall('todoAll', 'todochkbox');
+    $('[data-toggle="tooltip"]').tooltip()
+</script>
+{% endblock script %}

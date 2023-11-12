@@ -1,0 +1,225 @@
+{% extends 'schneiderplus/masterpage.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+  {% if status_slider == 200 %}
+    <section class="px-4">
+        <div class="container mx-auto max-w-screen-xl">
+            <div class="swiper main-slider">
+                <div class="swiper-wrapper">
+                  {% for slider in sliders %}
+                    <div class="swiper-slide">
+                      {% if slider.link != None %}
+                        <a href="{{slider.link}}">
+                          <img class="object-cover rounded-b-3xl w-full" src="/media/{{slider.picture}}" alt="{{slider.alt}}">
+                        </a>
+                      {% endif %}
+                      {% if slider.link == None %}
+                          <img class="object-cover rounded-b-3xl w-full" src="/media/{{slider.picture}}" alt="{{slider.alt}}">
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+                
+            </div>
+        </div>
+    </section>
+  {% endif %}
+
+  {% if status_category == 200 %}
+    <section class="my-14 px-4">
+      <div class="container mx-auto max-w-screen-xl">
+        <div class="text-center mb-8">
+          <h2 class="font-YekanBakh-ExtraBlack text-3xl">دسته بندی محصولات</h2>
+        </div>
+        <div class="swiper cat-slider">
+          <div class="swiper-wrapper">
+          {% for category in categories %}
+            <div class="swiper-slide">
+              <div class="border border-slate-200 bg-white rounded-3xl leading-10">
+                <a href="{% url 'categories' category.url %}" class="flex flex-col items-center justify-center p-4">
+                  <img class="w-16 mb-4" style="height: 64px !important; width: 64px !important;" src="/media/{{category.vector}}" alt=" وکتور {{category.name}}">
+                  <h3 class="font-YekanBakh-ExtraBold text-base"> {{category.name}} </h3>  
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+          
+      </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="my-14 px-4">
+    <div class="container mx-auto max-w-screen-xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <img class="rounded-3xl" src="{% static 'assets/images/11.png' %}" alt="">
+        </div>
+        <div>
+          <img class="rounded-3xl" src="{% static 'assets/images/12.png' %}" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if status_newestproduct == 200 %}
+    <section class="my-14 px-4">
+      <div class="container mx-auto max-w-screen-xl">
+        <div class="bg-green-800 rounded-3xl pt-10 pb-4">
+          <div class="text-center mb-8">
+            <h2 class="font-YekanBakh-ExtraBlack text-3xl text-white">جدیدترین محصولات</h2>
+          </div>
+          <div class="swiper slider-product1 mx-4 my-4">
+            <div class="swiper-wrapper">
+              {% for new_product in newest_products %}
+                <div class="swiper-slide">
+                  <div class="bg-white rounded-3xl leading-10 p-4">
+                      <a href="{% url 'products' new_product.Brand.en_name new_product.ProductCategorySubset.ProductCategory.url new_product.ProductCategorySubset.url new_product.enName %}" class="flex flex-col items-center justify-center">
+                        <img class="mb-4" src="/media/{{new_product.poster}}" alt="{{new_product.faName}}">
+                      </a>
+                    <div class="text-center">
+                      <a href="{% url 'products' new_product.Brand.en_name new_product.ProductCategorySubset.ProductCategory.url new_product.ProductCategorySubset.url new_product.enName %}"><h3 class="font-YekanBakh-ExtraBold text-base"> {{new_product.faName}} </h3></a>
+                      <div class="flex justify-center gap-4 text-base mt-4">
+                        <span class="font-YekanBakh-Regular"> {{new_product.code}} </span>
+                        <span class="font-YekanBakh-Regular text-green-800"> {{new_product.Brand.fa_name}} </span>
+                      </div>  
+                      <div class="flex justify-center gap-2 items-center mt-4">
+                      {% if status_support == 200 %}
+                        <a class="bg-green-800 p-2 text-white rounded-lg" type="telegram" rel="telegram" href="https://web.telegram.org/k/#@{{support.telegram_id}}">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16" id="IconChangeColor"> 
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z" id="mainIconPathAttribute"></path> 
+                          </svg>
+                        </a>
+                        <a class="bg-green-800 p-2 text-white rounded-lg" type="tel" rel="tel" href="tel:{{support.tel_phone_1th}}">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16"> 
+                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/> 
+                          </svg>
+                        </a>
+                      {% endif %}
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if status_specialblog == 200 %}
+    {% for special_blog in specialblog %}
+      <section class="my-14 px-4">
+        <div class="container mx-auto max-w-screen-xl">
+          <a href="{% url 'blog_det' special_blog.url %}">
+            <img class="rounded-2xl" src="/media/{{special_blog.second_poster}}" alt="{{special_blog.title}}">
+          </a>
+        </div>
+      </section>
+    {% endfor %}
+  {% endif %}
+
+  {% if status_higheproduct == 200 %}
+    <section class="my-14 px-4">
+      <div class="container mx-auto max-w-screen-xl">
+        <div class="text-center mb-8">
+          <h2 class="font-YekanBakh-ExtraBlack text-3xl">پربازدید ترین کالاها</h2>
+        </div>
+        <div class="swiper slider-product2">
+          <div class="swiper-wrapper">
+            {% for high_product in high_products %}
+              <div class="swiper-slide border-r-4 border-b-4 border-l-4 border-green-800 rounded-2xl col-4">
+                <div class="bg-white rounded-3xl leading-10 relative p-4">
+                  <div class="flex items-center justify-center">
+                    <div>
+                      <a href="{% url 'products' high_product.Brand.en_name high_product.ProductCategorySubset.ProductCategory.url high_product.ProductCategorySubset.url high_product.enName %}"> <img class="w-32" src="/media/{{high_product.poster}}" alt=""></a>
+                    </div>
+                    <div>
+                      <a href="{% url 'products' high_product.Brand.en_name high_product.ProductCategorySubset.ProductCategory.url high_product.ProductCategorySubset.url high_product.enName %}"><h3 class="font-YekanBakh-ExtraBold text-base"> {{high_product.faName}} </h3></a>
+                      <div class="flex justify-center gap-4 text-base mt-4">
+                        <span class="font-YekanBakh-Regular"> {{high_product.code}} </span>
+                        <span class="font-YekanBakh-Regular text-green-800"> {{high_product.Brand.fa_name}} </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+
+  {% if status_blog == 200 %}
+    <section class="my-14 px-4">
+      <div class="container mx-auto max-w-screen-xl">
+        <div class="text-center mb-8">
+          <h2 class="font-YekanBakh-ExtraBlack text-3xl">خواندنی های جدید</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for blog in blogs %} 
+          <div class="bg-white p-4 rounded-3xl">
+            <div class="relative">
+              <a href="{% url 'blog_det' blog.url %}"><img class="rounded-2xl" src="/media/{{blog.poster}}" alt="{{blog.title}}"></a>
+              <div class="absolute top-4 left-4 bg-white border-t-4 border-green-800 p-2 px-3 rounded-xl">
+                <div class="flex flex-col">
+                  <span class="font-YekanBakh-ExtraBold text-2xl">{{blog.day}}</span>
+                  <span class="font-YekanBakh-Bold">{{blog.month}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mt-4">
+              <div>
+                <a href="{% url 'blog_det' blog.url %}"><h3 class="font-YekanBakh-ExtraBold text-base"> {{blog.title}} </h3></a>
+              </div>
+              <div>
+                <a class="flex items-center" href="{% url 'blog_det' blog.url %}">
+                  <span class="ml-2">بیشتر</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                  </svg> 
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+{% endblock %}
+
+{% block meta_title %}
+ صفحه اصلی
+{% endblock meta_title %}
+
+{% block meta_tag %}
+
+{% endblock meta_tag %}
+
+{% block meta_description %}
+
+{% endblock meta_description %}
+
+{% block links %}
+
+{% endblock links %}
+
+{% block scripts %}
+
+{% endblock scripts %}

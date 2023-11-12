@@ -1,0 +1,77 @@
+{% extends 'schneiderplus/blog/masterpage.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<section class="my-14 mt-4 px-4">
+
+    <div class="container mx-auto max-w-screen-xl">
+        <div class="bg-white p-4 rounded-3xl mb-4">
+            <div class="text-sm breadcrumbs">
+              <ul>
+                <li><a>خانه</a></li> 
+                <li><a>دسته بندی</a></li> 
+                <li>وبلاگ</li>
+              </ul>
+            </div>
+          </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+            {% for blog in blogs %}
+                <div class="bg-white p-4 rounded-3xl">
+                    <div class="relative">
+                    <a href="{% url 'blog_det' blog.url %}"><img class="rounded-2xl" src="/media/{{blog.poster}}" alt=""></a>
+                    <div class="absolute top-4 left-4 bg-white border-t-4 border-yellow-400 p-2 px-3 rounded-xl">
+                        <div class="flex flex-col">
+                        <span class="font-YekanBakh-ExtraBold text-2xl">{{blog.day}}</span>
+                        <span class="font-YekanBakh-Bold">{{blog.month}}</span>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                    <div>
+                        <a href="{% url 'blog_det' blog.url %}"><h3 class="font-YekanBakh-ExtraBold text-base">{{blog.title}}</h3></a>
+                    </div>
+                    <div>
+                        <a class="flex items-center" href="{% url 'blog_det' blog.url %}">
+                        <span class="ml-2">بیشتر</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                        </svg> 
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="flex justify-center mt-10">
+          <div class="join">
+            <button class="join-item btn">«</button>
+            <button class="join-item btn">صفحه 22</button>
+            <button class="join-item btn">»</button>
+          </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+{% block meta_title %}
+ {{blog.title}}
+{% endblock meta_title %}
+
+{% block meta_tag %}
+
+{% endblock meta_tag %}
+
+{% block meta_description %}
+
+{% endblock meta_description %}
+
+{% block links %}
+
+{% endblock links %}
+
+{% block scripts %}
+
+{% endblock scripts %}

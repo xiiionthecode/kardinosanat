@@ -1,0 +1,49 @@
+{% extends 'adminstrator/dashboard/masterpage.html' %}
+{% load static %}
+
+
+
+{% block content %}	
+    <!--  BEGIN CONTENT PART  -->
+        <div id="content" class="main-content">
+            <div class="layout-px-spacing">
+
+                <div class="row layout-top-spacing">
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-three">
+                            <div class="widget-heading">
+                                <div class="">
+                                    <h5 class=""> بازدید کنندگان </h5>
+                                </div>
+                            </div>
+                            <div class="widget-content">
+                                <div id="uniqueVisits"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    <!--  END CONTENT PART  -->
+{% endblock content %}
+
+
+{% block meta_title %}
+    {{title}}
+{% endblock meta_title %}
+
+{% block dir %}
+    <h3> مدیریت </h3>
+{% endblock dir %}
+
+{% block links %}
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/plugins/apex/apexcharts.css'%}"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/dashboard/dash_2.css'%}"></script>
+{% endblock links %}
+
+{% block scripts %}
+<script src="{% static 'adminstrator/plugins/apex/apexcharts.min.js'%}"></script>
+<script src="{% static 'adminstrator/assets/js/dashboard/dash_2.js'%}"></script>
+
+{% endblock scripts %}

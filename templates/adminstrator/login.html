@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title> Login </title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/images/logo.png' %}"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/bootstrap/css/bootstrap.min.css'%}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/plugins.css'%}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/authentication/form-2.css'%}" />
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+	<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/forms/theme-checkbox-radio.css'%}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/forms/switches.css'%}" />
+   
+    <!-- BEGIN THIS PAGE ALERT -->
+	<link type="text/css" rel="stylesheet" href="{% static 'adminstrator/assets/css/elements/alert.css'%}" />
+    <style>
+        .btn-light { border-color: transparent; }
+    </style>
+    <!-- END THIS PAGE ALERT -->
+</head>
+<body class="form" style="overflow: hidden;">
+
+    <div id="outer" class="form-container outer">
+        <div id="custom_alert" class="widget-content widget-content-area d-none">
+            <div class="alert alert-danger mb-4" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button> <strong>خطا!</strong> لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ. </div>
+        </div>
+        <div class="form-form">
+            <div class="form-form-wrap">
+                <div class="form-container">
+                    <div class="form-content">
+                        <h1 class=""> صفحه ورود </h1>
+                        <p class="">برای ادامه به حساب کاربری خود وارد شوید</p>
+                        <div id="validation_msg">
+                        </div>
+                        <form class="text-left" method="POST">
+                            {% csrf_token %}
+                            <div class="form">
+                                <div id="phoneNumber-field" class="field-wrapper input">
+                                    <label for="phoneNumber" id="phoneNumber-label"> شماره تلفن </label>
+                                    <svg  id="user-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <input id="phoneNumber" name="phoneNumber" type="text" class="form-control"  oninput="this.value = this.value.replace(/^0/g, '');">
+                                </div>
+                                <div id="phoneNumber-field" class="field-wrapper input">
+                                    <label for="password" id="password-label"> رمز عبور </label>
+                                    <svg id="lock_svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    <input id="password" name="password" type="password" class="form-control"  oninput="this.value = this.value.replace(/^0/g, '');">
+                                    <svg id="eye_svg" onclick="ChangePasswordInputType()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-password" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </div>
+                                
+                                <div id="loginBTN-field" class="field-wrapper input">
+                                    <div class="field-wrapper">
+                                        <button id="submit-btn" name="loginBTN" onclick="login_button()" type="button" class="btn btn-primary col-12"> ورود </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'adminstrator/assets/js/libs/jquery-3.1.1.min.js'%}"></script>
+    <script src="{% static 'adminstrator/bootstrap/js/popper.min.js'%}"></script>
+    <script src="{% static 'adminstrator/bootstrap/js/bootstrap.min.js'%}"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script src="{% static 'adminstrator/assets/js/authentication/form-2.js'%}"></script>
+    <!-- ajax setup  -->
+    <script src="{% static 'assets/js/ajaxsetup.js'%}"></script>
+    <script src="{% static 'assets/js/jquery-3.1.1.min.js'%}"></script>
+
+    <script src="{% static 'adminstrator/ajax/login.js'%}"></script>
+    <!-- ajax setup  -->
+
+    <!-- BEGIN CLEAR -->
+    <script>
+        window.onload = function() {
+            var phonenumber = $('#phoneNumber').val('')
+        };
+    </script>
+    <!-- END CLEAR -->
+
+    <!-- BEGIN THIS PAGE ALERT -->
+    <script src="{% static 'adminstrator/assets/js/scrollspyNav.js'%}"></script>
+    <!-- END THIS PAGE ALERT -->
+
+
+</body>
+</html>

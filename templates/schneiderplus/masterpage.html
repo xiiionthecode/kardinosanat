@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="description" content="{% block meta_description %}  {% endblock %}">
+
+        <link rel="icon" type="image/png" href="{% static 'assets/images/Kardinosanat2_light.png' %}">
+
+        <title> {% block meta_title %}  {% endblock %} </title>
+
+        <link rel="stylesheet" href="{% static 'schneiderplus/node_modules/swiper/swiper-bundle.min.css'%}">
+        <link rel="stylesheet" href="{% static 'schneiderplus/build/style.css'%}">
+
+        {% block links %}
+        
+        {% endblock %}
+
+    </head>
+
+    <body class="bg-slate-50 font-YekanBakh-Regular text-sm">
+
+
+        <section class="bg-white px-4">
+        <div class="container mx-auto max-w-screen-xl">
+            <div class="flex items-center justify-between gap-4 lg:gap-40 py-6">
+                <div class="lg:hidden leading-none z-10">
+                    <div class="drawer">
+                        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+                        <div class="drawer-content">
+                            <label for="my-drawer-4" class="swap swap-rotate drawer-button">
+
+                                <!-- this hidden checkbox controls the state -->
+                                <input type="checkbox" />
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-black swap-off fill-current">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                </svg>
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-black swap-on fill-current">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                
+                            </label> 
+                            </div> 
+                            <div class="drawer-side">
+                            <label for="my-drawer-4" class="drawer-overlay"></label>
+                            <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                                <div class="drawer-content text-left">
+                                    <label for="my-drawer-4" class="swap swap-rotate drawer-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                    </label> 
+                                </div> 
+                                <li><a href="{% url 'landing_page' %}">صفحه اصلی</a></li>
+                                <li><a href="{% url 'allproducts' %}">فروشگاه</a></li>
+                                <li><a href="checkout.html">جزئیات پرداخت</a></li>
+                                <li><a href="comparison.html">مقایسه محصول</a></li>
+                                <li><a href="blog.html">وبلاگ</a></li>
+                                <li><a href="{% url 'about_us' %}">درباره ما</a></li>
+                                <li><a href="{% url 'contact_us' %}">تماس با ما</a></li>
+
+                            </ul>
+                            </div>
+                        </div>
+                </div>
+                <div class="flex items-center lg:flex-1 gap-8">
+                    <div><a href="{% url 'landing_page' %}"><img width="150px" height="50px" src="{% static 'assets/images/Kardinosanat.png' %}" alt=""></a></div>
+                    <div class="hidden lg:block form-control w-full">
+                        <div class="relative">
+                            <input type="text" placeholder="جستجو کنید در کاردینو صنعت ..." class="input input-bordered w-full placeholder:text-sm" /> 
+                            <button class="btn absolute top-0 left-0 rounded-r-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                                
+                            </button>
+                        </div>
+                        </div>
+                </div>
+                
+            </div>
+            <div class="flex justify-between items-center pb-4">
+                <div class="block lg:hidden form-control w-full">
+                    <div class="relative">
+                        <input type="text" placeholder="جستجو کنید در کاردینو صنعت ..." class="input input-bordered w-full placeholder:text-sm" /> 
+                        <button class="btn absolute top-0 left-0 rounded-r-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                            
+                        </button>
+                    </div>
+                </div>  
+                <div class="flex items-center gap-8">
+                    <div class="hidden lg:block">
+                        <ul class="flex gap-x-10">
+                            <li><a href="{% url 'landing_page' %}">صفحه اصلی</a></li>
+                            <li><a href="{% url 'allproducts' %}">فروشگاه</a></li>
+                            <li><a href="checkout.html">جزئیات پرداخت</a></li>
+                            <li><a href="comparison.html">مقایسه محصول</a></li>
+                            <li><a href="{% url 'blogs' %}">وبلاگ</a></li>
+                            <li><a href="{% url 'about_us' %}">درباره ما</a></li>
+                            <li><a href="{% url 'contact_us' %}">تماس با ما</a></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        </section>
+
+        {% block content %}
+
+        {% endblock %}
+        
+        <footer class="p-10 bg-stone-800 text-white">
+            <div class="container mx-auto max-w-screen-xl">
+            <div class="bg-green-800 p-8 rounded-3xl mb-10">
+                <div class="swiper partners">
+                    <div class="swiper-wrapper">
+
+                        {% for brand in brands %}
+                            <div class="swiper-slide">
+                                <div class="flex justify-center">
+                                    <a href="{% url 'brand_det' brand.url %}">
+                                        <img src="/media/{{brand.logo_1th}}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+        
+                    </div>
+                </div>
+            </div>
+                <div class="grid grid-cols-12 gap-4 leading-8">
+                    <div class="col-span-12 lg:col-span-5">
+                        <img class="mb-4 w-20" src="{% static 'assets/images/Kardinosanat2_light.png' %}" alt="">
+                        <p>
+                            کاردینو صنعت تامین و پخش کننده محصولات الکتریکی در ایران
+                        </p>
+                    </div>
+                    <div class="col-span-12 lg:col-span-2 text-right md:text-center">
+                        <h3 class="font-YekanBakh-Bold text-white mb-4 text-lg">دسترسی سریع</h3>
+                        <ul>
+                            <li><a href="{% url 'landing_page' %}">صفحه اصلی</a></li>
+                            <li><a href="shop.html">فروشگاه</a></li>
+                            <li><a href="question.html">سوالات متداول</a></li>
+                            <li><a href="contact-us.html">تماس با ما</a></li>
+                            <li><a href="blog.html">وبلاگ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-12 lg:col-span-2 text-right md:text-center">
+                        <h3 class="font-YekanBakh-Bold text-white mb-4 text-lg">خدمات شرکت</h3>
+                        <ul>
+                            <li><a href="single-product.html">صفحه محصول</a></li>
+                            <li><a href="single-page.html">جزئیات بلاگ</a></li>
+                            <li><a href="successful.html">ثبت موفق</a></li>
+                            <li><a href="unsuccessful.html">ثبت ناموفق</a></li>
+                            <li><a href="404.html">404</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-span-12 lg:col-span-3">
+                        <h3 class="font-YekanBakh-Bold text-white mb-4 text-lg">عضویت در خبرنامه</h3>
+                        <div class="flex items-center">
+                        <img src="../assets/images/enamad_logo.png" alt="">
+                        <img src="../assets/images/samandehi_logo.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    
+        <footer class="footer footer-center p-4 bg-stone-700 text-white">
+        <div>
+            <p>Copyright © 2023 - تمامی حقوق برای کاردینو صنعت محفوظ می باشد</p>
+        </div>
+        </footer>
+        <script src="{% static 'schneiderplus/node_modules/swiper/swiper-bundle.min.js'%}"></script>
+        <script src="{% static 'schneiderplus/js/main.js'%}"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        {% block scripts %}
+        
+        {% endblock %}
+        
+
+    </body>
+
+</html>
